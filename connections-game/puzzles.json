@@ -1,0 +1,30 @@
+{
+  "2024-12-01": {
+    "groups": [
+      {
+        "cat": "R2Vtc3RvbmVzL1ByZWNpb3Vz",
+        "wds": "UlVCWSxKQURFLEFNQkVSLEdFTU1B",
+        "color": "green",
+        "difficulty": 1
+      },
+      {
+        "cat": "UGxhbnRz",
+        "wds": "TElMWSxST1NFLEZFUk4sSEFaRUw=",
+        "color": "blue",
+        "difficulty": 2
+      },
+      {
+        "cat": "T2NjdXBhdGlvbnM=",
+        "wds": "SFVOVEVSLEFSQ0hFUixUQVlMT1IsRkxFVENIRVI=",
+        "color": "yellow",
+        "difficulty": 3
+      },
+      {
+        "cat": "UGxhY2Vz",
+        "wds": "QURFTEFJREVELE9OLEdFT1JHSUEsSk9SREFO",
+        "color": "purple",
+        "difficulty": 4
+      }
+    ]
+  }
+}

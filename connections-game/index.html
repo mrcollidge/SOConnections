@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOC Connections</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SOC CONNECTIONS</h1>
+        <p class="subtitle">Create four groups of four!</p>
+        
+        <div id="message" class="message"></div>
+        
+        <div id="completed-groups" class="completed-groups"></div>
+        
+        <div id="game-grid" class="grid">
+            <!-- Words will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="controls">
+            <button id="shuffle-btn" class="btn">Shuffle</button>
+            <button id="deselect-btn" class="btn">Deselect All</button>
+            <button id="submit-btn" class="btn btn-primary">Submit</button>
+        </div>
+        
+        <div class="mistakes">
+            Mistakes remaining: <span id="mistakes-count">4</span>
+        </div>
+    </div>
+    
+    <script src="puzzle.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
