@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - SOC Connections</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: #333;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin-bottom: 5px;
+        }
+        .header p {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        .content {
+            padding: 30px;
+        }
+        .setup-section {
+            background: #f0f7ff;
+            border: 2px solid #4a90e2;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .setup-section h3 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+        }
+        .setup-section ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        .setup-section code {
+            background: #e8f4f8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .puzzle-group {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        .puzzle-group.green { border-left-color: #90ee90; }
+        .puzzle-group.blue { border-left-color: #add8e6; }
+        .puzzle-group.yellow { border-left-color: #ffff99; }
+        .puzzle-group.purple { border-left-color: #dda0dd; }
+        
+        .puzzle-group h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .hint {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #5568d3;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+        .status.show {
+            display: block;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .config-toggle {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .config-toggle a {
+            color: #667eea;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .config-toggle a:hover {
+            text-decoration: underline;
+        }
+        #config-section {
+            display: none;
+        }
+        #puzzle-form {
+            display: none;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Admin Panel</h1>
+            <p>SOC Connections - Puzzle Manager</p>
+        </div>
+        
+        <div class="content">
+            <!-- Configuration Section -->
+            <div id="config-section">
+                <div class="setup-section">
+                    <h3>⚙️ First Time Setup</h3>
+                    <p style="margin-bottom: 15px;">You need a GitHub Personal Access Token to publish puzzles. Here's how to get one:</p>
+                    <ol>
+                        <li>Go to <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)</a></li>
+                        <li>Click "Generate new token" → "Generate new token (classic)"</li>
+                        <li>Give it a name like "SOC Connections Admin"</li>
+                        <li>Set expiration to "No expiration" (or your preference)</li>
+                        <li>Check the box for <code>repo</code> scope (this gives access to your repositories)</li>
+                        <li>Click "Generate token" at the bottom</li>
+                        <li>Copy the token (it looks like <code>ghp_xxxxxxxxxxxx</code>)</li>
+                        <li>Paste it below along with your repository details</li>
+                    </ol>
+                </div>
+
+                <div class="form-group">
+                    <label>GitHub Username:</label>
+                    <input type="text" id="github-username" placeholder="yourusername">
+                </div>
+
+                <div class="form-group">
+                    <label>Repository Name:</label>
+                    <input type="text" id="github-repo" placeholder="connections-game">
+                    <p class="hint">The name of your GitHub repository (e.g., "connections-game")</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Branch Name:</label>
+                    <input type="text" id="github-branch" value="main" placeholder="main">
+                    <p class="hint">Usually "main" or "gh-pages"</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Personal Access Token:</label>
+                    <input type="password" id="github-token" placeholder="ghp_xxxxxxxxxxxx">
+                    <p class="hint">Your GitHub token will be saved securely in your browser</p>
+                </div>
+
+                <button class="btn" onclick="saveConfig()">Save Configuration</button>
+            </div>
+
+            <!-- Puzzle Creation Form -->
+            <div id="puzzle-form">
+                <div class="form-group">
+                    <label>📅 Puzzle Date:</label>
+                    <input type="date" id="puzzle-date" required>
+                </div>
+
+                <div class="puzzle-group green">
+                    <h3>🟢 Green Group (Easiest)</h3>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <input type="text" id="cat1" placeholder="e.g., Gemstones" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Words (comma-separated):</label>
+                        <input type="text" id="words1" placeholder="e.g., RUBY,JADE,AMBER,GEMMA" required>
+                        <p class="hint">Exactly 4 words in CAPS, separated by commas (no spaces)</p>
+                    </div>
+                </div>
+
+                <div class="puzzle-group blue">
+                    <h3>🔵 Blue Group</h3>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <input type="text" id="cat2" placeholder="e.g., Plants" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Words (comma-separated):</label>
+                        <input type="text" id="words2" placeholder="e.g., LILY,ROSE,FERN,HAZEL" required>
+                        <p class="hint">Exactly 4 words in CAPS, separated by commas (no spaces)</p>
+                    </div>
+                </div>
+
+                <div class="puzzle-group yellow">
+                    <h3>🟡 Yellow Group</h3>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <input type="text" id="cat3" placeholder="e.g., Occupations" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Words (comma-separated):</label>
+                        <input type="text" id="words3" placeholder="e.g., HUNTER,ARCHER,TAYLOR,FLETCHER" required>
+                        <p class="hint">Exactly 4 words in CAPS, separated by commas (no spaces)</p>
+                    </div>
+                </div>
+
+                <div class="puzzle-group purple">
+                    <h3>🟣 Purple Group (Hardest)</h3>
+                    <div class="form-group">
+                        <label>Category:</label>
+                        <input type="text" id="cat4" placeholder="e.g., Places" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Words (comma-separated):</label>
+                        <input type="text" id="words4" placeholder="e.g., ADELAIDE,DEVON,GEORGIA,JORDAN" required>
+                        <p class="hint">Exactly 4 words in CAPS, separated by commas (no spaces)</p>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="publishPuzzle()" id="publish-btn">🚀 Publish Puzzle</button>
+                
+                <div class="config-toggle">
+                    <a onclick="toggleConfig()">⚙️ Change GitHub Configuration</a>
+                </div>
+            </div>
+
+            <div id="status" class="status"></div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
