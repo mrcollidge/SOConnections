@@ -26,5 +26,33 @@
         "difficulty": 4
       }
     ]
+  },
+  "2025-12-04": {
+    "groups": [
+      {
+        "cat": "QmlibGljYWwgZmlndXJlcw==",
+        "wds": "QURBTSxFVkEsQU5HRUwsTUlDSEFFTA==",
+        "color": "green",
+        "difficulty": 1
+      },
+      {
+        "cat": "TXl0aG9sb2dpY2FsIGNoYXJhY3RlcnM=",
+        "wds": "QUNISUxMRUFTLFBIT0VOSVgsR0FJQSxNQVJT",
+        "color": "blue",
+        "difficulty": 2
+      },
+      {
+        "cat": "TmFtZXMgZW5kaW5nIGluICJhIg==",
+        "wds": "QVZBLE1JQSxFTU1BLFNPUEhJQQ==",
+        "color": "yellow",
+        "difficulty": 3
+      },
+      {
+        "cat": "SGlzdG9yaWNhbCBmaWd1cmVz",
+        "wds": "Q0FUSEVSSU5FLFNPS1JBVElTLEFMRVhBTkRFUixBVUdVU1RVUw==",
+        "color": "purple",
+        "difficulty": 4
+      }
+    ]
   }
 }
