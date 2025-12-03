@@ -30,13 +30,13 @@
   "2025-12-04": {
     "groups": [
       {
-        "cat": "QmlibGljYWwgZmlndXJlcw==",
-        "wds": "QURBTSxFVkEsQU5HRUwsTUlDSEFFTA==",
+        "cat": "QmlibGljYWwgbmFtZXM=",
+        "wds": "QURBTSxFVkEsQU5HRUwsUEFVTA==",
         "color": "green",
         "difficulty": 1
       },
       {
-        "cat": "TXl0aG9sb2dpY2FsIGNoYXJhY3RlcnM=",
+        "cat": "U3R1ZmYgZnJvbSBteXRob2xvZ3k=",
         "wds": "QUNISUxMRUFTLFBIT0VOSVgsR0FJQSxNQVJT",
         "color": "blue",
         "difficulty": 2
